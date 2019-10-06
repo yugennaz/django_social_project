@@ -1,0 +1,4 @@
+.roperproject
+db.sqlite3
+.pytest_cache
+_pycache_
