@@ -1,6 +1,6 @@
 .roperproject
 db.sqlite3
 .pytest_cache
-_pycache_
+__pycache__
 /media/
 *.pyc

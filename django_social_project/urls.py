@@ -19,12 +19,17 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from . import views
+from . api import api_urls
+from rest_framework.authtoken import views as drf_views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/auth/', drf_views.obtain_auth_token),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/', include(api_urls)),
     path('', views.HomeView.as_view(), name='home'),
     path('', include("django.contrib.auth.urls")),
-    path('login/', auth_views.LogoutView.as_view(), name='login'),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
