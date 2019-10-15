@@ -17,7 +17,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 class UserDetailSerializer(serializers.ModelSerializer):
     images = ImageSerializer(many=True)
+    followers = serializers.ReadOnlyField(source='followers.count')
+    following = serializers.ReadOnlyField(source='following.count')
 
     class Meta:
         model = User
-        fields = ['username', 'images']
+        fields = ['username', 'images', 'followers', 'following']

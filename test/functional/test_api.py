@@ -46,3 +46,5 @@ def test_users_detail(data, api_client):
     response = response.json()
     assert response['username'] == 'alice'
     assert len(response['images']) == 2
+    assert response['followers'] == 3
+    assert response['following'] == 2
