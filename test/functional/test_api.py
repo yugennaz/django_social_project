@@ -48,3 +48,17 @@ def test_users_detail(data, api_client):
     assert len(response['images']) == 2
     assert response['followers'] == 3
     assert response['following'] == 2
+
+
+def test_images_list(data, api_client):
+    response = api_client.get('/api/images/')
+    assert response.status_code == 200
+    response = response.json()
+    assert len(response) == len(Image.objects.all())
+
+
+def test_images_list_filter_by_user_id(data, api_client):
+    response = api_client.get('/api/images/?user_id=1')
+    assert response.status_code == 200
+    response = response.json()
+    assert len(response) == len(Image.objects.filter(user_id=1))

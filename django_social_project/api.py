@@ -36,6 +36,7 @@ class MultiSerializerViewSetMixin(object):
 
 class ImageViewSet(ModelViewSet):
     serializer_class = ImageSerializer
+    filterset_fields = ['user_id']
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
