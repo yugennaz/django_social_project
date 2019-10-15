@@ -11,4 +11,3 @@ class HomeView(ListView):
     #     if self.request.user.is_authenticated:
     #         return Image.objects.filter(user__in=self.request.user.following)
     #     return Image.objects.all
-

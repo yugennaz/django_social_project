@@ -8,7 +8,17 @@ from .serializers import ImageSerializer, UserSerializer
 
 class ImageViewSet(ModelViewSet):
     serializer_class = ImageSerializer
-    queryset = Image.objects.all()
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            following = [
+                follower.following for follower in
+                self.request.user.following.all()
+            ]
+            following.append(self.request.user)
+
+            return Image.objects.filter(user__in=following)
+        return Image.objects.all()
 
 
 class UserViewSet(ModelViewSet):
@@ -17,6 +27,6 @@ class UserViewSet(ModelViewSet):
 
 
 router = routers.SimpleRouter()
-router.register(r'images', ImageViewSet)
+router.register(r'images', ImageViewSet, basename='Image')
 router.register(r'users', UserViewSet)
 api_urls = router.urls

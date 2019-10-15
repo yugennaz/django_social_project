@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from .models import Image, User, Follower
 
 
@@ -8,10 +9,8 @@ class ImageAdmin(admin.ModelAdmin):
 
 
 @admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    list_display = [
-        'first_name', 'last_name'
-    ]
+class UserAdmin(UserAdmin):
+    pass
 
 
 @admin.register(Follower)
